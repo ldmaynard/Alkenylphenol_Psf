@@ -1,0 +1,161 @@
+---
+title: "README"
+output: github_document
+---
+Data from "Title" by L.D. Maynard, author list... 
+Published in (Journal) on (date)
+Article DOI TBD
+
+All data were collected at La Selva Biological Station, Heredia Province, Costa Rica
+
+##Maynard_etal_AlkenylphenolQuantChem_edit.csv
+These data were collected during June–July 2017 and June–July 2018 from 21 individuals of 
+Piper sancti-felicis. Each branch was collected from the plant in the afternoon, usually between 
+1300h and 1600h, and included a ripe infructescence that had matured on that day. 
+Mature, fully expanded leaves from branches were also collected. Each sample was dried 
+in separate envelopes in the field with silica, transported to Virginia Tech, 
+and further lyophilized prior to alkenylphenol extractions. To separate pulp, seeds, and rachis 
+of the reproductive structures, the dried samples were processed through stainless steel mesh 
+sieves. Dried plant material was extracted twice in ethanol and evaporated to dryness, then
+a chloroform partition was performed. The chloroform layer was separated and evaporated to dryness.
+The final extract was resuspended in DCM and analyzed on a GCMS.
+
+no = individual identifier
+sample = sample number
+tissue = tissue type (L=leaf, P=pulp/flower, S=seed)
+plant = individual plant number (1-21)
+stage = stage of tissue (1=ripe pulp, 2=unripe pulp (stage 2), 3=unripe pulp (stage 3), 4=flower (stage 4), 5=flower (stage 5), 6=developing flower, M=mature leaf)
+BR = peak area of IST (4-butylresorcinol)
+A = peak area of compound A
+B = peak area of compound B
+C = peak area of compound C
+D = peak area of compound D
+E = peak area of compound E
+F = peak area of compound F 
+G = peak area of compound G
+H = peak area of compound H 
+I = peak area of compound I 
+J = peak area of compound J
+pulp_wt_mg = weight of dry plant material (mg)
+pulp_wt_g = weight of dry plant material (g)
+insert_wt = weight of GC insert before adding alkenylphenol extract (g)
+insert_extract = weight of GC insert with the alkenylphenol extract (g)
+extract_wt_g = weight of alkenylphenol extracts (g)
+extract_wt_mg = weight of alkenylphenol extracts (mg)
+A_corr = peak area of compound A, corrected using the peak of area of IST
+B_corr = peak area of compound B, corrected using the peak of area of IST
+C_corr = peak area of compound C, corrected using the peak of area of IST
+D_corr = peak area of compound D, corrected using the peak of area of IST
+E_corr = peak area of compound E, corrected using the peak of area of IST
+F_corr = peak area of compound F, corrected using the peak of area of IST
+G_corr = peak area of compound G, corrected using the peak of area of IST
+H_corr = peak area of compound H, corrected using the peak of area of IST
+I_corr = peak area of compound I, corrected using the peak of area of IST
+J_corr = peak area of compound J, corrected using the peak of area of IST
+A_pdw = porportion dry weight of compound A
+B_pdw = porportion dry weight of compound B
+C_pdw = porportion dry weight of compound C
+D_pdw = porportion dry weight of compound D
+E_pdw = porportion dry weight of compound E
+F_pdw = porportion dry weight of compound F
+G_pdw = porportion dry weight of compound G
+H_pdw = porportion dry weight of compound H
+I_pdw = porportion dry weight of compound I
+J_pdw = porportion dry weight of compound J
+
+##Maynard_etal_AlkenylphenolFungalBioassays.csv
+These data were collected from microdilution assays in September 2018 using extracts of
+alkeneylphenols from ripe fruits and three species of fungi harvested from the seeds of P. sancti-felicis.
+Experiment was performed in a 96-well plate.
+
+ID = individual identifier
+well = well of the 96-well plate
+fungi = species of fungi (R3, R23, R26)
+Conc = concentration of alkenylphenols in the well (starting concentration = x and halved 8 times)
+day 0 = average absorbance (OD) after 0 h
+day 1 = average absorbance (OD) after 24 h
+day 3 = average absorbance (OD) after 72 h
+abs_corr = average absorbance (OD) of day 3 - day 0
+
+##Maynard_etal_PiperRemovalStudy.csv
+These data were collected from observing the removal of fruits from 10 individual plants of Piper sancti-felicis
+during May 26 to May 31 2009.
+
+event = individual identifier of the event
+tree.no = individual identifier of the tree
+branch.no = individual identifier of the branch
+date = date of observation
+time.of.day = time of day of observation (1=night, 2=day)
+ripeness = ripeness of removed fruit (1=ripe, 2=unripe)
+
+
+##Maynard_etal_AlkenylphenolAnimalTrials.csv
+These data were collecting January-March 2018. We conducted feeding trials in a 
+controlled flight cage setting with one representative species from each group of 
+dispersers: Seba’s Short-tailed Bat (Carollia perspicillata) and 
+Passerini’s Tanager (Ramphocelus passerinii). Every day for four days,
+each individual was presented two dishes of 3g of “banana pudding.” One dish was
+supplemented with the extracted compounds (treatment) and the other was not
+(control).
+
+ID = individual identifier of the animal
+sex = sex of animal (M=male, F=female)
+age = age of animal (J= juvenile, A=adult)
+rs = reproductive status (r=reproductive, nr=non-reproductive)
+season = cyclic season (D=dry, W=wet)
+concentration = concentation of alkenylphenols (% found in a ripe fruit, always 100)
+control.start.wt = starting weight of the control dish (g)
+treatment.start.wt = starting weight of the treatment dish (g)
+control.side = side control was placed in the cage (R=right, L=left)
+start.time = time the trial was started (hh:mm)
+end.time = time the trial was ended (hh:mm)
+time.to.beg.inspection = time it took the animal to inspect the food (hh:mm:ss, only available if camera was used during the trial)
+control.end.wt = end weight of the control dish (g)
+treatment.end.wt = end weight of the treatment dish (g)
+camera = individual identifier of camera, if one was used during the trial
+date = date of trial (mm/dd/yy)
+c.eaten = amount of control diet eaten by the animal (g)
+t.eaten = amount of treatment diet eaten by the animal (g)
+participate = if the animal chose a dish during the trial time (1=participated, 0=did not participate)
+dish.choice = from a visual inspection, which dish did the animal choose
+trial.no = individual identifier of the trial for the animal; how many trials had they participated in (1-4)
+round = individual identifier of the round of animals (1-4)
+animal = type of animal in the trial (Bird=R. passerinii, Bat=C. perspicillata)
+forearm.wing = measurment of the forearm (bat) or wing (bird) of the animal (mm)
+
+
+##Maynard_etal_Birds_Psf.csv
+Data were collected July 5-10. Six individuals of P. sancti-felcis were observed in the
+morning (800-1100) and/or the afternoon (1300-1900) for visiting bird species.
+
+date = date of observation (mm/dd/yy)
+piper = individual identifier of the P. sancti-felicis plant
+arrival_time = time the individual bird arrived at the plant (hh:mm)
+depart_time = time the individual bird left the plant (hh:mm)
+time_at_piper = duration the individual spent on the plant (depart_time-arrival_time, hh:mm)
+sp = species   (BGTA	Blue-grey tanager	Thraupis episcopus,
+		BRHE	Bronzy hermit		Glaucis aeneus,
+		BTSA	Buff-throated saltator	Saltator maximus,
+		CCTH	Clay-colored thrush	Turdus grayi,
+		GHTA	Golden-hooded tanager	Tangara larvata,
+		GRKI	Great kiskadee		Pitangus sulphuratus,
+		OBEU	Olive-backed euphonia	Euphonia gouldi,
+		PALT	Palm tanager		Thraupis palmarum,
+		PAST	Passerini tanager	Ramphocelus passerinii,
+		PCTA	Plain-colored tanager	Tangara inornata,
+		RTAT	Red-throated ant tanager	Habia fuscicauda,
+		RTHU	Rufous-tailed hummingbird	Amazilia tzacatl,
+		VASE	Variable seedeater	Sporophila corvina,
+		WCMA	White-collared manakin	Manacus candei)
+sex = sex of bird (M=male, F=female)
+gleaning = the individual used the plant to glean insects (0=no, 1=yes)
+cover/perch = the individual used the plant to perch or as cover 
+frugivory = the individual used the plant to eat the infructescences
+defense = the individual was defended the plant from other bird species 
+parental care = the individual used the plant to care for its young
+socializing = the individual used the plant to socialize with other birds
+calling = the individual used the plant to call/sing
+activity 1 = the first behavior the bird exhibited (C=calling,G=gleaning, F=frugivory,X=cover/perch, S=socializing, P=parental care, D=defending)
+activity 2 = the second behavior the bird exhibited (C=calling,G=gleaning, F=frugivory,X=cover/perch, S=socializing, P=parental care, D=defending)
+activity 3 = the third behavior the bird exhibited (C=calling,G=gleaning, F=frugivory,X=cover/perch, S=socializing, P=parental care, D=defending)
+notes = notes about the observation

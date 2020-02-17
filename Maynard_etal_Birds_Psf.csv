@@ -1,0 +1,49 @@
+﻿date,piper,arrival_time,depart_time,time_at_piper,sp,sex,gleaning,cover/perch,frugivory,defense,parental care,socializing,calling,activity1,activity2,activity3,notes
+7/5/18,D11,8:25,8:28,0:03,PAST,F,,1,1,,,,1,C,X,F,"PAST female frequently calling from tree, using low branches to perch from and then foraging from ground"
+7/5/18,D11,8:38,8:39,0:01,PALT,,1,,,,,,,G,,,"PALT gleaning from high branches, then chased off by PAST at 840"
+7/5/18,D11,8:40,8:45,0:05,PAST,F,1,1,,1,,,,D,C,G,"PAST chased off PALT, female calling and gleaning"
+7/5/18,D11,8:52,8:52,0:00,RTHU,,,1,,,,,,X,,,RTHU perching/ cover
+7/5/18,D11,9:12,9:14,0:02,PAST,M,1,,,,,,1,C,G,,Male PAST flew to tree/ calling. Gleaning. 
+7/5/18,D11,9:13,9:16,0:03,PAST,F,1,,,,,,1,C,G,,Second PAST female also flew in. All 3 PAST calling and gleaning. Male flew off before females. 
+7/5/18,D11,9:13,9:16,0:03,PAST,F,1,,,,,,1,G,C,,PAST female also flew in. Gleaning. 
+7/5/18,D12,9:04,9:09,0:05,PAST,F,,,1,,,,1,F,C,,"PAST fm flew in, calling and feeding on fruit. "
+7/5/18,D12,9:04,9:09,0:05,PAST,F,,,1,,,,,F,,,"PAST fm flew in, feeding on fruit. "
+7/5/18,D12,9:04,9:09,0:05,PAST,F,,,1,,,,,F,,,"PAST fm flew in, feeding on fruit. "
+7/5/18,D12,9:05,9:09,0:04,PAST,M,,,1,,,,1,C,F,,"Male PAST, calling heavily, feeding on fruit. All PAST flew to forest edge. "
+7/5/18,D12,9:22,9:22,0:00,RTHU,,,1,,,,,,X,,,RTHU perched
+7/5/18,D12,9:24,9:24,0:00,RTHU,,,1,,,,,,X,,,RTHU perched
+7/5/18,D12,9:37,9:39,0:02,GHTA,,,1,,,,,,X,,,GHTA using as cover and foraging from neighboring tree (orange flowers)
+7/5/18,D12,9:38,9:38,0:00,GHTA,,,1,,,,,,X,,,"Second GHTA flew in, also using as cover and foraging from neighboring tree"
+7/6/18,CM22,8:58,8:58,0:00,BRHE,,,1,,,,,,X,,,BRHE using as cover 
+7/6/18,CM22,9:10,9:12,0:02,WCMA,F,,1,,,,,,X,,,"WCMA fm flew in, hopped around, flew off"
+7/6/18,CM22,10:34,10:34,0:00,VASE,,,1,,,,,,X,,,VASE perched on lower branch for a moment before foraging on ground
+7/6/18,CM22,15:59,16:04,0:05,BGTA,,,,1,,,,,F,,,BGTA foraging on ripe seeds
+7/6/18,CM22,16:04,16:08,0:04,PAST,F,,,1,1,,,,D,F,,"PAST female chased off BGTA, then foraged"
+7/6/18,CM22,16:10,16:12,0:02,BTSA,,,,1,,,,,F,,,"Flew in, foraged briefly, feeding on seeds"
+7/6/18,CM22,16:15,16:22,0:07,PALT,,,,1,,,1,,F,S,,Foraging on seeds and socializing
+7/6/18,CM22,16:16,16:22,0:06,PALT,,,,1,,,1,,F,S,,2nd PALT Foraging on seeds and socializing
+7/6/18,CM22,16:16,16:22,0:06,PALT,,,,1,,,1,,F,S,,3rd PALT Foraging on seeds and socializing
+7/6/18,CM22,16:16,16:22,0:06,PALT,,,,1,,,1,,F,S,,4th PALT foraging on seeds and socializing 
+7/6/18,CM22,16:17,16:19,0:02,OBEU,,,,1,,,,,F,,,"Also eating ripe seeds, chased off by one of the PALT already on tree"
+7/6/18,CM22,16:20,16:20,0:00,BGTA,,,1,,,,,,X,,,"Flew in, hopped around a bit, did not eat"
+7/6/18,CM22,16:30,16:35,0:05,PAST,F,,,1,1,,,,D,F,,"PAST female flew in, chased off a PALT and to eat ripe seeds"
+7/6/18,CM22,16:30,16:35,0:05,PAST,M,,,1,,,1,,F,S,,"PAST male feeding, socializing with female"
+7/6/18,CM22,16:31,16:31,0:00,PALT,,,1,,,,,,X,,,"Flew in briefly, immediately chased off by PAST female"
+7/6/18,CM22,16:40,16:41,0:01,PCTA,,,1,,,,,,X,,,"Perched, hopping around"
+7/8/18,3,13:08,13:08,0:00,RTAT,,,1,,,,,,X,,,Briefly perched
+7/10/18,4,16:40,16:42,0:02,GHTA,,,,1,,,,,F,,,GHTA feeding on fruit
+7/10/18,4,16:43,16:43,0:00,GHTA,,,1,,,,,1,X,C,,"GHTA perched briefly, chipping"
+7/10/18,4,16:55,16:56,0:01,GRKI,,,1,,,,,,X,,,Quickly perched and flew off
+7/10/18,4,17:08,17:09,0:01,PAST,F,,1,,,,,,X,,,Female PAST perched briefly before joining larger group nearby
+7/10/18,4,17:11,17:11,0:00,CCTH,,,1,,,,,,X,,,Flew in and perched before dropping to ground to forage
+7/10/18,4,17:13,17:13,0:00,PAST,M,,1,,,,,,X,,,Male PAST briefly flew into tree before feeding young in adjacent tree
+7/10/18,4,17:15,17:15,0:00,GHTA,,,1,,,,,,X,,,GHTA briefly flew in and flew off 
+7/10/18,4,17:24,17:26,0:02,GHTA,,1,,,,,,1,C,G,,"GHTA chipping, gleaning"
+7/10/18,4,17:25,17:26,0:01,GHTA,,,,,,,1,1,C,S,,"Second GHTA flew in, hopping around with other GHTA, chipping, did not feed"
+7/10/18,5,17:35,17:38,0:03,PAST,I,,1,,,,,,X,,,"Immature PAST (recently fledged, no tail) hiding in piper, being fed repeatedly by single male PAST, eventually flew off to adjacent bush"
+7/10/18,5,17:40,17:41,0:01,PAST,M,,,,,,,,P,,,Male PAST feeding young
+7/10/18,5,17:51,17:52,0:01,PAST,M,,,,,1,,,P,,,"Male PAST feeding young, caterpillar "
+7/10/18,5,17:59,18:00,0:01,PAST,M,,,,,1,,,P,,,Male PAST feeding young
+7/10/18,5,18:01,18:01,0:00,PAST,M,,,,,,,1,C,,,Male PAST flew back into tree and appeared to be alarm calling 
+7/10/18,5,18:15,18:15,0:00,PAST,M,,1,,,,,,X,,,Male PAST briefly flew into tree before feeding young in adjacent tree
+7/10/18,5,18:20,18:20,0:00,GHTA,,,1,,,,,,X,,,GHTA briefly flew in and flew off 
