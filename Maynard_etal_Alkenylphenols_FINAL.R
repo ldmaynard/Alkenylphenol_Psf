@@ -168,6 +168,26 @@ dev.off()
 #tissueplot_bwj
 #dev.off()
 
+library(brewer)
+a10_se <- summarySE(a10, measurevar="props", groupvars=c("tissue"))
+tissue_bar<-ggplot(a10_se, aes(x=tissue, y=props, fill=tissue)) +
+	geom_bar(stat = "summary")+
+	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
+	theme_classic()+
+	scale_x_discrete(limits=c("Mature leaves","Late flowers", "Late unripe pulp","Ripe pulp",
+							  "Seeds"))+
+	scale_y_continuous(limits = c(0, 0.06))+
+	theme(text = element_text(size=15),
+		  axis.text.x = element_text(angle=45, hjust=1), legend.position = "none")+
+	geom_errorbar(aes(ymin=props-se, ymax=props+se), width=.1)+
+	scale_fill_viridis(discrete = T, option = "D")
+tissue_bar
+
+#EXPORT PLOT
+tiff('tissue_barplot.tiff', units="in", width=5, height=4, res=500)
+tissue_bar
+dev.off()
+
 #SUMMARY STATS
 library(plyr)
 tissue.tab <- ddply(a10, c("tissue"), summarise,
@@ -408,11 +428,6 @@ sum.plot1<-ggarrange(a.plot, f.plot,b.plot,g.plot,c.plot,h.plot,d.plot,i.plot,e.
                      font.label = list(size = 22))
 sum.plot1
 
-##EXPORT PLOT
-#tiff('supp_fig.tiff', units="in", width=25, height=25, res=500)
-#sum.plot1
-#dev.off()
-
 
 # Objective 3: Fungal bioassays --------------------------------------------------------
 
@@ -422,8 +437,8 @@ datf <- datf[1:81,]
 datf$Conc<-as.numeric(datf$Conc)
 datf$fungi<-as.character(datf$fungi)
 datf$nfungi[datf$fungi=="R3"]="Microdochium lycopodinum"
-datf$nfungi[datf$fungi=="R23"]="Fusarium verticillioides"
-datf$nfungi[datf$fungi=="R26"]="Fusarium sp."
+datf$nfungi[datf$fungi=="R23"]="Fusarium A"
+datf$nfungi[datf$fungi=="R26"]="Fusarium B"
 
 #average triplicates
 ag.fun<-aggregate(abs_corr~Conc+nfungi+well, data=datf, FUN=mean) 
@@ -450,9 +465,9 @@ plot(allEffects(mod.fun))
 datf <- datf[order(datf$fungi),]
 ag.fun<-ag.fun[order(ag.fun$nfungi),]
 
-R26<-slice(ag.fun, 1:9)
-R23<-slice(ag.fun, 10:18)
-R3<-slice(ag.fun, 19:27)
+R23<-slice(ag.fun, 1:9) #Fusarium A
+R26<-slice(ag.fun, 10:18) #Fusarium B
+R3<-slice(ag.fun, 19:27) #M. lychopodinum
 
 mod23<-lm(data = R23, abs_corr~Conc)
 mod26<-lm(data = R26, abs_corr~Conc)
@@ -460,15 +475,14 @@ mod3<-lm(data = R3, abs_corr~Conc)
 
 summary(mod23)#t=-7.03,p=0.0002,r2=0.88
 summary(mod26)#t=-1.0, p=0.351, r2=0.13
-summary(mod3)#t=-5.213, p=0.00124, r2=0.83
+summary(mod3)#t=-5.213, p=0.00124, r2=0.80
 
-mod23#m= -46.894
--46.894*0.1
-#4.7 dec every .1%dw
+mod23#m= -0.4339 
+#-0.43  Fusarium A dec every 1 mg/mL increase
 
-mod3 #m= -53.8707
--53.8707*0.1
-#5.4 decrease every .1%dw
+mod3 #m= -0.4985
+#0.50 Ml decrease every 1 mg/mL increase
+
 
 R23$yhat<-predict(mod23)
 predplot23<-ggplot(R23)+
@@ -489,19 +503,31 @@ predplot3<-ggplot(R3)+
 predplot3
 
 ##back-calculating alkenylphenol concentrations in wells
-#ripe fruit mean x 5g starting plant material
-0.027073768*5
+#ripe fruit mean (10mg) = 0.2925986
+#average concentration of alkenylphenols in 10mg ripe fruit
+0.2925986/10
 
-#0.1353688g resuspended in 2mL
-0.1353688/2
+#alkenylphenols in 1mg ripe fruit=0.02925986
+#alkenylphenols in 5g (5g starting plant material)
+0.02925986*5000
+
+#in the vial, there was 146.2993 mg of alkenylphenols
+
+#146.2993mg resuspended in 2mL=73.14965mg/mL
+146.2993/2
 
 #Heather's dilutions
-0.0676844/8
+73.14965/80
+
+#highest concentration in well is 0.9143706 mg/ml
+0.9143706/3000
+#~0.0003047902 prop fresh weight of fruit
+
 
 ##DATA PLOT
 ###load italics for legend
-leg_fung <- c(expression(paste(italic("Fusarium "), "sp.")),
-			 expression(paste(italic("Fusarium verticillioides"))), 
+leg_fung <- c(expression(paste(italic("Fusarium "), "A")),
+			 expression(paste(italic("Fusarium "), "B")), 
 			 expression(paste(italic("Microdochium lycopodinum"))))
 
 #plot
@@ -510,15 +536,17 @@ plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
 	geom_point(aes(color=nfungi))+
 	theme_classic()+
 	scale_color_viridis(discrete = T, option = "D", labels=leg_fung)+
-	labs(x="Total alkenylphenols (prop. dw)", y="Average absorbance (OD)", color=" ")+
-	theme(legend.text.align = 0, text = element_text(size=18),legend.position="top")+ 
-	annotate("text", x = 0.0075, y = 0.67,
+	labs(x="Alkenylphenol concentration (mg/mL)", y="Average absorbance (OD)", color=" ")+
+	theme(legend.text.align = 0, text = element_text(size=18),legend.position="top",
+		  plot.margin = margin(10, 30, 10, 10))+ 
+	scale_x_continuous(expand = c(0, 0), limits = c(0.0,0.92), 
+					   breaks = c(0.0,0.23,0.46,0.69, 0.92))+
+	annotate("text", x = 0.8, y = 0.68,
 			 label = "paste(italic(R) ^ 2, \" = 0.88\")", parse = TRUE, size =5)+ 
-	annotate("text", x = 0.0075, y = 0.47,
+	annotate("text", x = 0.8, y = 0.465,
 			 label = "paste(italic(R) ^ 2, \" = 0.13\")", parse = TRUE, size =5)+ 
-	annotate("text", x = 0.0075, y = 0.3,
-			 label = "paste(italic(R) ^ 2, \" = 0.83\")", parse = TRUE, size =5)+
-  scale_x_continuous(expand = c(0, 0), limits = c(0.0,0.0085))
+	annotate("text", x = 0.8, y = 0.3,
+			 label = "paste(italic(R) ^ 2, \" = 0.80\")", parse = TRUE, size =5)
 plota
 #Error message "polygon edge not found, just run it again
 plota
@@ -527,30 +555,6 @@ plota
 tiff('fungiplot.tiff', units="in", width=8, height=5, res=500)
 plota
 dev.off()
-
-##bw plot
-plot.bw<-ggplot(datf, aes(x=Conc, y=abs_corr, group=nfungi))+
-	geom_smooth(aes(linetype=nfungi),color="black", method = "lm", se=T)+
-	scale_linetype_manual(values=c("dotted", "solid", "twodash"),labels=leg_fung)+
-	geom_point()+
-	theme_minimal()+
-	labs(x="Concentration (Prop. in ripe infruct.)", y="Absorbance (OD)", linetype="Fungi")+
-	theme(legend.text.align = 0)+ 
-	annotate("text", x = 2.20, y = 0.68,
-			 label = "paste(italic(R) ^ 2, \" = 0.84\")", parse = TRUE)+ 
-	annotate("text", x = 2.20, y = 0.54,
-			 label = "paste(italic(R) ^ 2, \" = 0.04\")", parse = TRUE)+ 
-	annotate("text", x = 2.20, y = 0.42,
-			 label = "paste(italic(R) ^ 2, \" = 0.77\")", parse = TRUE)
-plot.bw
-#Error message "polygon edge not found, just run it again
-plot.bw
-
-#EXPORT B&W PLOT
-#tiff('fungiplot_bw.tiff', units="in", width=8, height=5, res=500)
-#plot.bw
-#dev.off()
-
 
 
 # Objective 4b: Animal preference trials ------------------------------------------------
@@ -620,6 +624,39 @@ tiff('animal_pref.tiff', units="in", width=8, height=4, res=500)
 animal.plot
 dev.off()
 
+##barplot
+bat_agse <- summarySE(bat_ag, measurevar="amount_eaten", groupvars=c("treatment"))
+
+batpref_bar<-ggplot(bat_agse,aes(x=treatment,y=amount_eaten, fill=treatment))+geom_bar(stat = "summary")+
+	theme_classic()+
+	labs(x=" ",y="Average amount eaten (g)")+
+	scale_y_continuous(limits =  c(0,3))+
+	theme(text = element_text(size = 18), legend.position = "none")+
+	geom_errorbar(aes(ymin=amount_eaten-se, ymax=amount_eaten+se), width=.1)+
+	scale_fill_viridis(discrete = T, option = "D")
+batpref_bar
+
+bird_agse <- summarySE(bird_ag, measurevar="amount_eaten", groupvars=c("treatment"))
+birdpref_bar<-ggplot(bird_agse,aes(x=treatment,y=amount_eaten, fill=treatment))+
+	geom_bar(stat = "summary")+
+	theme_classic()+
+	labs(x=" ",y="")+
+	scale_y_continuous(limits =  c(0,3))+
+	theme(text = element_text(size = 18), legend.position = "none")+
+	geom_errorbar(aes(ymin=amount_eaten-se, ymax=amount_eaten+se), width=.1)+
+	scale_fill_viridis(discrete = T, option = "D")
+birdpref_bar
+
+animal.plot.bar<-ggarrange(batpref_bar, birdpref_bar, 
+						   labels = c("a", "b"),heights = c(2, 2),
+						   ncol = 2, nrow = 1, align = "v")
+animal.plot.bar
+
+#EXPORT PLOT
+tiff('animal_pref_bar.tiff', units="in", width=8, height=4, res=500)
+animal.plot.bar
+dev.off()
+
 bat.tab <- ddply(bat_ag, c("treatment"), summarise,
                  N    = length(amount_eaten),
                  mean = mean(amount_eaten),
@@ -678,41 +715,3 @@ bp <- ggplot(tbl3, aes(x=Var2, y=Freq, fill=Var1))+
 bp
 
 
-
-# Natural history information (Objective 4)####
-birb <- read.csv(file="Maynard_etal_Birds_Psf.csv",head=TRUE,fill=T)
-birb[is.na(birb)] <- 0
-birb$gleaning<-as.numeric(as.character(birb$gleaning))
-birb$frugivory<-as.numeric(as.character(birb$frugivory))
-birb$cover.perch<-as.numeric(as.character(birb$cover.perch))
-birb$defense<-as.numeric(as.character(birb$defense))
-birb$calling<-as.numeric(as.character(birb$calling))
-birb$socializing<-as.numeric(as.character(birb$socializing))
-birb$parental.care<-as.numeric(as.character(birb$parental.care))
-
-birb$sp<-as.numeric(birb$sp)
-birb$sp<-as.character(birb$sp)
-levels(birb$sp)
-
-
-#summary table of bird activities
-birb.sum<-aggregate(gleaning+frugivory+cover.perch+defense+
-						calling+socializing+parental.care~sp, data=birb, FUN=sum) 
-
-head(birb.sum)
-#not right yet
-
-library(dplyr)
-bir <- birb %>%
-	group_by(sp) %>%
-	summarise(gleaning=sum(gleaning), frugivory=sum(frugivory))
-bir
-#nope
-
-#summary table of Passerini tanager activities 
-birb <- birb[order(birb$sp),]
-PAST<-slice(birb, 22:41)
-past.sum<-aggregate(date~gleaning+frugivory+cover.perch+defense+
-						calling+socializing+parental.care, data=PAST, FUN=mean) 
-
-past.sum
