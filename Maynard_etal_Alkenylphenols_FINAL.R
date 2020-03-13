@@ -269,14 +269,14 @@ stage_line_plot2<-ggplot(ag_dat)+
 stage_line_plot2
 
 stage_line_plot<-ggplot(ag_dat)+
-	geom_line(aes(x=stage.name,y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
+	geom_line(aes(x=as.factor(stage.name),y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
 	stat_smooth(aes(x=stage.name,y=props),method = "lm", formula = y ~ x + I(x^2), size = 1.5,
 				linetype="solid", color="black")+
 	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
 	theme_classic()+
 	scale_color_viridis(discrete = T, option = "D")+
 	theme(text = element_text(size = 15), 
-		  axis.text.x = element_text(angle=45, hjust=1), legend.position = "none"))+
+		  axis.text.x = element_text(angle=45, hjust=1), legend.position = "none")+
 	scale_y_continuous(expand=c(0.0,0.0))+
 	coord_cartesian(xlim=c(1.0,6.0), ylim=c(0.0,.1))
 stage_line_plot
