@@ -146,7 +146,7 @@ a10$tissue[a10$tissue=="Flowers (4)"]="Late flowers"
 a10$tissue[a10$tissue=="Ripe pulp (1)"]="Ripe pulp"
 
 
-tissueplot_bwj<-ggplot(a10, aes(x=tissue, y=props)) +
+tissueplot<-ggplot(a10, aes(x=tissue, y=props)) +
 	geom_boxplot(outlier.shape = NA) + geom_jitter(position=position_jitter(width = 0.04), alpha=0.4)+
 	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
 	theme_classic()+
@@ -157,11 +157,11 @@ tissueplot_bwj<-ggplot(a10, aes(x=tissue, y=props)) +
 	scale_y_continuous(limits = c(0, 0.120))+
 	theme(text = element_text(size=15),
 		  axis.text.x = element_text(angle=45, hjust=1))
-tissueplot_bwj
+tissueplot
 
 #EXPORT PLOT
-tiff('Maynard_etal_Fig3.tiff', units="in", width=6, height=5, res=500)
-tissueplot_bwj
+tiff('Maynard_etal_Fig3.tiff', units="in", width=6, height=5, res=400)
+tissueplot
 dev.off()
 
 #barplot (means and SEs)
@@ -242,20 +242,8 @@ modcomp<-aictab(cand.set=list(beta12,beta13,null.mod),
 
 modcomp #top model is nonlinear (mod with quad term)
 
-ag_dat$stage.num[datall$tissue=="R"]="Ripe pulp (1)"
 
-ag_dat$stage.name <- NA
-for(i in 1:length(ag_dat$stage.name)){
-	if(ag_dat$stage.num[i]=="1"){ag_dat$stage.name[i]="Ripe pulp"}
-	if(ag_dat$stage.num[i]=="2"){ag_dat$stage.name[i]="Late unripe pulp"}
-	if(ag_dat$stage.num[i]=="3"){ag_dat$stage.name[i]="Early unripe pulp"}
-	if(ag_dat$stage.num[i]=="4"){ag_dat$stage.name[i]="Late flowers"}
-	if(ag_dat$stage.num[i]=="5"){ag_dat$stage.name[i]="Early flowers"}
-	if(ag_dat$stage.num[i]=="6"){ag_dat$stage.name[i]="Developing flowers"}
-}
-ag_dat$stage.name<-as.factor(ag_dat$stage.name)
-
-stage_line_plot2<-ggplot(ag_dat)+
+stage_line_plot<-ggplot(ag_dat)+
 	geom_line(aes(x=stage.num,y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
 	stat_smooth(aes(x=stage.num,y=props),method = "lm", formula = y ~ x + I(x^2), size = 1.5,
 				linetype="solid", color="black")+
@@ -266,24 +254,12 @@ stage_line_plot2<-ggplot(ag_dat)+
 	theme(text = element_text(size = 15), axis.text.x.bottom = element_blank())+
 	scale_y_continuous(expand=c(0.0,0.0))+
 	coord_cartesian(xlim=c(1.0,6.0), ylim=c(0.0,.1))
-stage_line_plot2
-
-stage_line_plot<-ggplot(ag_dat)+
-	geom_line(aes(x=as.factor(stage.name),y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
-	stat_smooth(aes(x=stage.name,y=props),method = "lm", formula = y ~ x + I(x^2), size = 1.5,
-				linetype="solid", color="black")+
-	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
-	theme_classic()+
-	scale_color_viridis(discrete = T, option = "D")+
-	theme(text = element_text(size = 15), 
-		  axis.text.x = element_text(angle=45, hjust=1), legend.position = "none")+
-	scale_y_continuous(expand=c(0.0,0.0))+
-	coord_cartesian(xlim=c(1.0,6.0), ylim=c(0.0,.1))
 stage_line_plot
 
+
 ##EXPORT PLOT
-tiff('stage_line_plot.tiff', units="in", width=8, height=5, res=500)
-stage_line_plot2
+tiff('Maynard_etal_Fig4.tiff', units="in", width=8, height=5, res=400)
+stage_line_plot
 dev.off()
 
 #SUMMARY STATS
@@ -473,7 +449,7 @@ modcomp.fung<-aictab(cand.set=list(mod.fun,mod.add,mod.con,mod.fung,mod.null),
 modcomp.fung #top model is interactive
 
 
-Anova(mod.fun)
+Anova(mod.fun)#two-way ANOVA
 
 library(effects)
 summary(allEffects(mod.fun))
@@ -565,11 +541,11 @@ plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
 	annotate("text", x = 0.8, y = 0.3,
 			 label = "paste(italic(R) ^ 2, \" = 0.80\")", parse = TRUE, size =5)
 plota
-#Error message "polygon edge not found, just run it again
+#Sometimes error message "polygon edge not found", just run it again
 plota
 
 #EXPORT PLOT
-tiff('fungiplot.tiff', units="in", width=8, height=5, res=500)
+tiff('Maynard_etal_Fig5.tiff', units="in", width=8, height=5, res=400)
 plota
 dev.off()
 
@@ -637,7 +613,7 @@ animal.plot<-ggarrange(batpref, birdpref,
 animal.plot
 
 #EXPORT PLOT
-tiff('animal_pref.tiff', units="in", width=8, height=4, res=500)
+tiff('Maynard_etal_Fig6.tiff', units="in", width=8, height=4, res=400)
 animal.plot
 dev.off()
 
