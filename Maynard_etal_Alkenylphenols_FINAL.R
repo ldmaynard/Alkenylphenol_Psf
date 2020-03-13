@@ -160,15 +160,11 @@ tissueplot_bwj<-ggplot(a10, aes(x=tissue, y=props)) +
 tissueplot_bwj
 
 #EXPORT PLOT
-tiff('tissueplot.tiff', units="in", width=6, height=5, res=500)
+tiff('Maynard_etal_Fig3.tiff', units="in", width=6, height=5, res=500)
 tissueplot_bwj
 dev.off()
 
-#postscript('tissueplot_bwj.svg', width=6, height=5)
-#tissueplot_bwj
-#dev.off()
-
-library(brewer)
+#barplot (means and SEs)
 a10_se <- summarySE(a10, measurevar="props", groupvars=c("tissue"))
 tissue_bar<-ggplot(a10_se, aes(x=tissue, y=props, fill=tissue)) +
 	geom_bar(stat = "summary")+
@@ -182,11 +178,6 @@ tissue_bar<-ggplot(a10_se, aes(x=tissue, y=props, fill=tissue)) +
 	geom_errorbar(aes(ymin=props-se, ymax=props+se), width=.1)+
 	scale_fill_viridis(discrete = T, option = "D")
 tissue_bar
-
-#EXPORT PLOT
-tiff('tissue_barplot.tiff', units="in", width=5, height=4, res=500)
-tissue_bar
-dev.off()
 
 #SUMMARY STATS
 library(plyr)
@@ -251,6 +242,19 @@ modcomp<-aictab(cand.set=list(beta12,beta13,null.mod),
 
 modcomp #top model is nonlinear (mod with quad term)
 
+ag_dat$stage.num[datall$tissue=="R"]="Ripe pulp (1)"
+
+ag_dat$stage.name <- NA
+for(i in 1:length(ag_dat$stage.name)){
+	if(ag_dat$stage.num[i]=="1"){ag_dat$stage.name[i]="Ripe pulp"}
+	if(ag_dat$stage.num[i]=="2"){ag_dat$stage.name[i]="Late unripe pulp"}
+	if(ag_dat$stage.num[i]=="3"){ag_dat$stage.name[i]="Early unripe pulp"}
+	if(ag_dat$stage.num[i]=="4"){ag_dat$stage.name[i]="Late flowers"}
+	if(ag_dat$stage.num[i]=="5"){ag_dat$stage.name[i]="Early flowers"}
+	if(ag_dat$stage.num[i]=="6"){ag_dat$stage.name[i]="Developing flowers"}
+}
+ag_dat$stage.name<-as.factor(ag_dat$stage.name)
+
 stage_line_plot2<-ggplot(ag_dat)+
 	geom_line(aes(x=stage.num,y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
 	stat_smooth(aes(x=stage.num,y=props),method = "lm", formula = y ~ x + I(x^2), size = 1.5,
@@ -263,6 +267,19 @@ stage_line_plot2<-ggplot(ag_dat)+
 	scale_y_continuous(expand=c(0.0,0.0))+
 	coord_cartesian(xlim=c(1.0,6.0), ylim=c(0.0,.1))
 stage_line_plot2
+
+stage_line_plot<-ggplot(ag_dat)+
+	geom_line(aes(x=stage.name,y=props,color=plant),alpha=0.5,size=1,show.legend = F)+
+	stat_smooth(aes(x=stage.name,y=props),method = "lm", formula = y ~ x + I(x^2), size = 1.5,
+				linetype="solid", color="black")+
+	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
+	theme_classic()+
+	scale_color_viridis(discrete = T, option = "D")+
+	theme(text = element_text(size = 15), 
+		  axis.text.x = element_text(angle=45, hjust=1), legend.position = "none"))+
+	scale_y_continuous(expand=c(0.0,0.0))+
+	coord_cartesian(xlim=c(1.0,6.0), ylim=c(0.0,.1))
+stage_line_plot
 
 ##EXPORT PLOT
 tiff('stage_line_plot.tiff', units="in", width=8, height=5, res=500)
