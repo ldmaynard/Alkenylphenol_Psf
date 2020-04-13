@@ -2,7 +2,7 @@
 title: "README"
 output: github_document
 ---
-Data from "Title" by L.D. Maynard, author list... 
+Data from "Secondary metabolites in a neotropical shrub: spatiotemporal allocation and role in fruit defense and dispersal" by L.D. Maynard, H.L. Slinn, A.E. Glassmire, B. Matarrita-Carranza, C.D. Dodson, T.T. Nguyen, M.J. Burroughs, L.A. Dyer, C.S. Jeffrey, S.R. Whitehead
 Published in (Journal) on (date)
 Article DOI TBD
 
