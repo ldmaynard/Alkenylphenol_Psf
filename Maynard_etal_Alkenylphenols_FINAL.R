@@ -147,7 +147,7 @@ a10$tissue[a10$tissue=="Ripe pulp (1)"]="Ripe pulp"
 
 
 tissueplot<-ggplot(a10, aes(x=tissue, y=props)) +
-	geom_boxplot(outlier.shape = NA) + geom_jitter(position=position_jitter(width = 0.04), alpha=0.4)+
+	geom_boxplot(outlier.shape = NA) + geom_jitter(position=position_jitter(width = 0.04), alpha=0.25)+
 	labs(x=" ", y="Total alkenylphenols (prop. dw)")+
 	theme_classic()+
 	scale_x_discrete(limits=c("Mature leaves","Late flowers", "Late unripe pulp","Ripe pulp",
@@ -156,7 +156,9 @@ tissueplot<-ggplot(a10, aes(x=tissue, y=props)) +
 				 fun.y = max, vjust = -0.8)+
 	scale_y_continuous(limits = c(0, 0.120))+
 	theme(text = element_text(size=15),
-		  axis.text.x = element_text(angle=45, hjust=1))
+		  axis.text.x = element_text(angle=45, hjust=1))+
+	stat_summary(fun.y=mean, colour="black", geom="point", 
+				 shape=18, size=4,show.legend = FALSE)
 tissueplot
 
 #EXPORT PLOT
@@ -536,10 +538,11 @@ plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
 					   breaks = c(0.0,0.23,0.46,0.69, 0.92))+
 	annotate("text", x = 0.8, y = 0.68,
 			 label = "paste(italic(R) ^ 2, \" = 0.88\")", parse = TRUE, size =5)+ 
-	annotate("text", x = 0.8, y = 0.465,
-			 label = "paste(italic(R) ^ 2, \" = 0.13\")", parse = TRUE, size =5)+ 
 	annotate("text", x = 0.8, y = 0.3,
 			 label = "paste(italic(R) ^ 2, \" = 0.80\")", parse = TRUE, size =5)
+#to include R^2 for Fusarium B,
+#annotate("text", x = 0.8, y = 0.465, label = "paste(italic(R) ^ 2, \" = 0.13\")", parse = TRUE, size =5)
+
 plota
 #Sometimes error message "polygon edge not found", just run it again
 plota
@@ -592,19 +595,23 @@ bird_ag$treatment[bird_ag$treatment=="t.eaten"]="Treatment"
 bird_ag$treatment[bird_ag$treatment=="c.eaten"]="Control"
 
 batpref<-ggplot(bat_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
-	geom_jitter(position=position_jitter(width = 0.03), alpha=0.5, size=1.7)+
+	geom_jitter(position=position_jitter(width = 0.03), alpha=0.25, size=1.7)+
 	theme_classic()+
 	labs(x=" ",y="Average amount eaten (g)")+
 	scale_y_continuous(limits =  c(0,3))+
-	theme(text = element_text(size = 18))
+	theme(text = element_text(size = 18))+
+	stat_summary(fun.y=mean, colour="black", geom="point", 
+				 shape=18, size=5,show.legend = FALSE)
 batpref
 
 birdpref<-ggplot(bird_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
-	geom_jitter(position=position_jitter(width = 0.03), alpha=0.5,size=1.7)+
+	geom_jitter(position=position_jitter(width = 0.03), alpha=0.25,size=1.7)+
 	theme_classic()+
 	labs(x=" ",y="")+
 	scale_y_continuous(limits =  c(0,3))+
-	theme(text = element_text(size = 18))
+	theme(text = element_text(size = 18))+
+	stat_summary(fun.y=mean, colour="black", geom="point", 
+				 shape=18, size=5,show.legend = FALSE)
 birdpref
 
 animal.plot<-ggarrange(batpref, birdpref, 
