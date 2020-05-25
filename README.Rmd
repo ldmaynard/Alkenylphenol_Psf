@@ -18,13 +18,13 @@ and further lyophilized prior to alkenylphenol extractions. To separate pulp, se
 of the reproductive structures, the dried samples were processed through stainless steel mesh 
 sieves. Dried plant material was extracted twice in ethanol and evaporated to dryness, then
 a chloroform partition was performed. The chloroform layer was separated and evaporated to dryness.
-The final extract was resuspended in DCM and analyzed on a GCMS.
+The final extract was resuspended in DCM and analyzed using GCMS.
 
 no = individual identifier
 sample = sample number
 tissue = tissue type (L=leaf, P=pulp/flower, S=seed)
 plant = individual plant number (1-21)
-stage = stage of tissue (1=ripe pulp, 2=unripe pulp (stage 2), 3=unripe pulp (stage 3), 4=flower (stage 4), 5=flower (stage 5), 6=developing flower, M=mature leaf)
+stage = stage of tissue (1=ripe pulp, 2=unripe pulp, 3=unripe pulp, 4=flower, 5=flower, 6=developing flower, M=mature leaf)
 BR = peak area of IST (4-butylresorcinol)
 A = peak area of compound A
 B = peak area of compound B
@@ -71,7 +71,7 @@ Experiment was performed in a 96-well plate.
 ID = individual identifier
 well = well of the 96-well plate
 fungi = species of fungi (R3, R23, R26)
-Conc = concentration of alkenylphenols in the well (starting concentration = x and halved 8 times)
+Conc = concentration of alkenylphenols in the well
 day 0 = average absorbance (OD) after 0 h
 day 1 = average absorbance (OD) after 24 h
 day 3 = average absorbance (OD) after 72 h
