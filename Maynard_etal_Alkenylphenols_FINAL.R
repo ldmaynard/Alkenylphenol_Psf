@@ -608,7 +608,7 @@ birdpref<-ggplot(bird_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
 	geom_jitter(position=position_jitter(width = 0.03), alpha=0.25,size=1.7)+
 	theme_classic()+
 	labs(x=" ",y="")+
-	scale_y_continuous(limits =  c(0,3))+
+	scale_y_continuous(limits =  c(0,3.01))+
 	theme(text = element_text(size = 18))+
 	stat_summary(fun.y=mean, colour="black", geom="point", 
 				 shape=18, size=5,show.legend = FALSE)
