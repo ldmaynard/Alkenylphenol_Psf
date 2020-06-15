@@ -743,27 +743,13 @@ birb.plot<-ggplot(birb.melt) +
 	labs(y="No. visits", fill = "Activity", x="")+
 	scale_fill_manual(labels=c("Gleaning","Frugivory", "Cover/perch", "Defense", "Calling",
 							   "Socializing", "Parental care"), 
-					  values = c("#00FFFF", "#00DAFC", "#00B3F1", "#008BDA", "#2E62B7", "#503889", "#540055"))+
+					  values = c("#66c2a5", "#fc8d62", "#8da0cb", "#e78ac3", "#a6d854", "#ffd92f", "#e5c494"))+
 	theme_classic()+
-	theme(text = element_text(size=13))
+	theme(text = element_text(size=13),
+											 axis.text.x = element_text(angle=45, hjust=1))
 birb.plot
 
-#this isn't summarizing by bird species...
-library(dplyr)
-bir <- birb %>%
-	group_by(sp) %>%
-	summarise(gleaning=sum(gleaning), frugivory=sum(frugivory))
-bir
-
-df2_summed <- group_by(df2, product_id, p) %>%
-	summarise(p_active_summed = sum(p_active))
-
-library(ggplot2)
-ggplot(bir, aes(x = sp, y = p_active_summed, fill = as.factor(product_id))) + 
-	geom_col()
-
-#summary table of Passerini tanager activities 
-birb <- birb[order(birb$sp),]
-PAST<-slice(birb, 22:41)
-past.sum<-aggregate(date~gleaning+frugivory+cover.perch+defense+
-						calling+socializing+parental.care, data=PAST, FUN=mean) 
+#EXPORT PLOT
+tiff('Maynard_etal_FigS2.tiff', units="in", width=8, height=4, res=500)
+birb.plot
+dev.off()
