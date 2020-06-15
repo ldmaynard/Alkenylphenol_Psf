@@ -714,4 +714,56 @@ bp <- ggplot(tbl3, aes(x=Var2, y=Freq, fill=Var1))+
 	
 bp
 
+# Natural history information (Objective 4)####
+birb <- read.csv(file="Maynard_etal_Birds_Psf.csv",head=TRUE,fill=T)
+birb[is.na(birb)] <- 0
+birb$gleaning<-as.numeric(birb$gleaning)
+birb$frugivory<-as.numeric(birb$frugivory)
+birb$cover.perch<-as.numeric(birb$cover.perch)
+birb$defense<-as.numeric(birb$defense)
+birb$calling<-as.numeric(birb$calling)
+birb$socializing<-as.numeric(birb$socializing)
+birb$parental.care<-as.numeric(birb$parental.care)
 
+
+#summary table of bird activities
+#Warning, sum not meaningful for factors. Not sure why it isn't recognizing the commands above...
+birb$no.visits<-aggregate(gleaning+frugivory+cover.perch+defense+
+						calling+socializing+parental.care~sp, data=birb, FUN=sum) 
+
+head(birb.sum)
+
+birb.melt<-melt(birb, id.vars="sp", measure.vars=c('gleaning', 'frugivory', 'cover.perch',
+												   'defense','calling','socializing','parental.care'))
+
+colnames(birb.melt$gleaning) <- birb.melt$Gleaning
+
+birb.plot<-ggplot(birb.melt) +
+	geom_bar(aes(x=sp, y=value, fill=as.factor(variable)), stat = "identity")+
+	labs(y="No. visits", fill = "Activity", x="")+
+	scale_fill_manual(labels=c("Gleaning","Frugivory", "Cover/perch", "Defense", "Calling",
+							   "Socializing", "Parental care"), 
+					  values = c("#00FFFF", "#00DAFC", "#00B3F1", "#008BDA", "#2E62B7", "#503889", "#540055"))+
+	theme_classic()+
+	theme(text = element_text(size=13))
+birb.plot
+
+#this isn't summarizing by bird species...
+library(dplyr)
+bir <- birb %>%
+	group_by(sp) %>%
+	summarise(gleaning=sum(gleaning), frugivory=sum(frugivory))
+bir
+
+df2_summed <- group_by(df2, product_id, p) %>%
+	summarise(p_active_summed = sum(p_active))
+
+library(ggplot2)
+ggplot(bir, aes(x = sp, y = p_active_summed, fill = as.factor(product_id))) + 
+	geom_col()
+
+#summary table of Passerini tanager activities 
+birb <- birb[order(birb$sp),]
+PAST<-slice(birb, 22:41)
+past.sum<-aggregate(date~gleaning+frugivory+cover.perch+defense+
+						calling+socializing+parental.care, data=PAST, FUN=mean) 
