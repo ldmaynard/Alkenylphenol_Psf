@@ -25,7 +25,7 @@ library(ggpubr)
 library(pals)
 
 
-# Objective 2: Quantitative chemistry -------------------------------------
+# Objective 2a: Quantitative chemistry -------------------------------------
 
 df_all <- read.csv(file="Maynard_etal_AlkenylphenolQuantChem.csv",head=TRUE)
 #removing columns unnec. for analysis
@@ -152,13 +152,11 @@ tissueplot<-ggplot(a10, aes(x=tissue, y=props)) +
 	theme_classic()+
 	scale_x_discrete(limits=c("Mature leaves","Late flowers", "Late unripe pulp","Ripe pulp",
 							  "Seeds"))+
-	stat_summary(geom = 'text', label = c("B","A","C","A","C"),
+	stat_summary(geom = 'text', label = c("B","C","A","C","A"),
 				 fun.y = max, vjust = -0.8)+
 	scale_y_continuous(limits = c(0, 0.120))+
 	theme(text = element_text(size=15),
-		  axis.text.x = element_text(angle=45, hjust=1))+
-	stat_summary(fun.y=mean, colour="black", geom="point", 
-				 shape=18, size=4,show.legend = FALSE)
+		  axis.text.x = element_text(angle=45, hjust=1))
 tissueplot
 
 #EXPORT PLOT
@@ -193,7 +191,7 @@ tissue.tab
 #EXPORT TABLE
 #write.table(tissue.tab, file = "TableS4.csv", sep = ",", quote = FALSE, row.names = F)
 
- ##Alkenylphenols over fruit ripening------------------------------------
+ ## Objective 2b: Alkenylphenols over fruit ripening------------------------------------
 
 #creating columns for stage as continuous variable and stage^2 (quadratic term)
 dat[is.na(dat)] <- 0
@@ -446,7 +444,7 @@ mod.fung<-lm(abs_corr~nfungi, data=ag.fun)
 mod.null<-lm(abs_corr~1, data=ag.fun)
 
 modcomp.fung<-aictab(cand.set=list(mod.fun,mod.add,mod.con,mod.fung,mod.null),
-				modnames=c("Interaction","Add","Concentration", "Fung. sp.", "Null"))#AIC table
+				modnames=c("Interactive","Add","Concentration", "Fung. sp.", "Null"))#AIC table
 
 modcomp.fung #top model is interactive
 
@@ -544,7 +542,7 @@ plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
 #annotate("text", x = 0.8, y = 0.465, label = "paste(italic(R) ^ 2, \" = 0.13\")", parse = TRUE, size =5)
 
 plota
-#Sometimes error message "polygon edge not found", just run it again
+#Sometimes error message "polygon edge not found", so run it again
 plota
 
 #EXPORT PLOT
