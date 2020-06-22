@@ -525,11 +525,12 @@ leg_fung <- c(expression(paste(italic("Fusarium "), "A")),
 
 #plot
 plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
-	geom_smooth(aes(color=nfungi), method = "lm", se=T)+
+	geom_smooth(aes(color=nfungi, linetype=nfungi), method = "lm", se=T)+
 	geom_point(aes(color=nfungi))+
 	theme_classic()+
-	scale_color_viridis(discrete = T, option = "D", labels=leg_fung)+
-	labs(x="Alkenylphenol concentration (mg/mL)", y="Average absorbance (OD)", color=" ")+
+	scale_color_manual(values = c("#440154FF", "#1f968bff", "#fde725ff"), labels=leg_fung)+
+	scale_linetype_manual(values = c("solid", "dotted", "dashed"), labels=leg_fung)+
+	labs(x="Alkenylphenol concentration (mg/mL)", y="Average absorbance (OD)", color=" ", linetype=" ")+
 	theme(legend.text.align = 0, text = element_text(size=18),legend.position="top",
 		  plot.margin = margin(10, 30, 10, 10))+ 
 	scale_x_continuous(expand = c(0, 0), limits = c(0.0,0.92), 
@@ -538,6 +539,7 @@ plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
 			 label = "paste(italic(R) ^ 2, \" = 0.88\")", parse = TRUE, size =5)+ 
 	annotate("text", x = 0.8, y = 0.3,
 			 label = "paste(italic(R) ^ 2, \" = 0.80\")", parse = TRUE, size =5)
+
 #to include R^2 for Fusarium B,
 #annotate("text", x = 0.8, y = 0.465, label = "paste(italic(R) ^ 2, \" = 0.13\")", parse = TRUE, size =5)
 
@@ -597,9 +599,7 @@ batpref<-ggplot(bat_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
 	theme_classic()+
 	labs(x=" ",y="Average amount eaten (g)")+
 	scale_y_continuous(limits =  c(0,3))+
-	theme(text = element_text(size = 18))+
-	stat_summary(fun.y=mean, colour="black", geom="point", 
-				 shape=18, size=5,show.legend = FALSE)
+	theme(text = element_text(size = 18))
 batpref
 
 birdpref<-ggplot(bird_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
@@ -607,9 +607,7 @@ birdpref<-ggplot(bird_ag,aes(x=treatment,y=amount_eaten))+geom_boxplot()+
 	theme_classic()+
 	labs(x=" ",y="")+
 	scale_y_continuous(limits =  c(0,3.01))+
-	theme(text = element_text(size = 18))+
-	stat_summary(fun.y=mean, colour="black", geom="point", 
-				 shape=18, size=5,show.legend = FALSE)
+	theme(text = element_text(size = 18))
 birdpref
 
 animal.plot<-ggarrange(batpref, birdpref, 
