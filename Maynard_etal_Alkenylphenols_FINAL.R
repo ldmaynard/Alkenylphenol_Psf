@@ -160,7 +160,7 @@ tissueplot<-ggplot(a10, aes(x=tissue, y=props)) +
 tissueplot
 
 #EXPORT PLOT
-tiff('Maynard_etal_Fig3.tiff', units="in", width=6, height=5, res=400)
+tiff('Maynard_etal_Fig4.tiff', units="in", width=6, height=5, res=400)
 tissueplot
 dev.off()
 
@@ -258,7 +258,7 @@ stage_line_plot
 
 
 ##EXPORT PLOT
-tiff('Maynard_etal_Fig4.tiff', units="in", width=8, height=5, res=400)
+tiff('Maynard_etal_Fig5.tiff', units="in", width=8, height=5, res=400)
 stage_line_plot
 dev.off()
 
@@ -525,7 +525,7 @@ leg_fung <- c(expression(paste(italic("Fusarium "), "A")),
 
 #plot
 plota<-ggplot(ag.fun, aes(x=Conc, y=abs_corr, group=nfungi))+
-	geom_smooth(aes(color=nfungi, linetype=nfungi), method = "lm", se=T)+
+	geom_smooth(aes(color=nfungi, linetype=nfungi), method = "lm", se=T, size=1.5)+
 	geom_point(aes(color=nfungi))+
 	theme_classic()+
 	scale_color_manual(values = c("#440154FF", "#1f968bff", "#fde725ff"), labels=leg_fung)+
@@ -548,7 +548,7 @@ plota
 plota
 
 #EXPORT PLOT
-tiff('Maynard_etal_Fig5.tiff', units="in", width=8, height=5, res=400)
+tiff('Maynard_etal_Fig6.tiff', units="in", width=8, height=5, res=400)
 plota
 dev.off()
 
@@ -616,7 +616,7 @@ animal.plot<-ggarrange(batpref, birdpref,
 animal.plot
 
 #EXPORT PLOT
-tiff('Maynard_etal_Fig6.tiff', units="in", width=8, height=4, res=400)
+tiff('Maynard_etal_Fig7.tiff', units="in", width=8, height=4, res=400)
 animal.plot
 dev.off()
 
