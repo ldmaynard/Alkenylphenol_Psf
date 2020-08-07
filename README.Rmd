@@ -6,7 +6,7 @@ Data from "Secondary metabolites in a neotropical shrub: spatiotemporal allocati
 Published in Ecology
 Article DOI TBD
 
-[![DOI](https://zenodo.org/badge/241215455.svg)](https://zenodo.org/badge/latestdoi/241215455)
+https://zenodo.org/badge/latestdoi/241215455
 
 
 All data were collected at La Selva Biological Station, Heredia Province, Costa Rica
